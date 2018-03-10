@@ -1,0 +1,60 @@
+'.source.js':
+  'Create an unstated container component skeleton':
+    'prefix': 'uc'
+    'body': """
+      import { Container } from 'unstated'
+
+      class ${1:ContainerName} extends Container {
+      	state = {${2:PropertyName}:${3:PropertyValue}}
+
+      	${4:ActionName}() {
+          const {${2:PropertyName}} = this.state
+      		this.setState({ ${2:PropertyName}: ${2:PropertyName} ${5:Payload} })
+      	}
+      }
+
+      export default ${1:ContainerName}
+    """
+  'Import unstated container':
+    'prefix': 'uic'
+    'body': """
+      import ${1:ContainerName}Container from '../containers/${1:ContainerName}'
+      """
+  'Create an unstated subscribed component':
+    'prefix': 'usc'
+    'body': """
+      import React from 'react'
+      import { Subscribe } from 'unstated'
+      import ${1:ContainerName}Container from '../containers/${1:ContainerName}'
+
+      const ${2:SubscribedComponentName} = () => (
+        <Subscribe to={[${1:ContainerName}Container]}>
+      		{${1:ContainerName} => {
+      			return (
+      				${3:Children}
+      			)
+      		}}
+      	</Subscribe>
+      )
+
+      export default ${2:SubscribedComponentName}
+    """
+  'Unstated index.js skeleton':
+    'prefix': 'uidx'
+    'body': """
+      import React from 'react'
+      import ReactDOM from 'react-dom'
+      import App from './App'
+      import { Provider } from 'unstated'
+
+      import registerServiceWorker from './registerServiceWorker'
+
+      ReactDOM.render(
+      	<Provider>
+      		<App />
+      	</Provider>,
+      	document.getElementById('root')
+      )
+      registerServiceWorker()
+    """
+    
